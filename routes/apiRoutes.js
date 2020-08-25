@@ -31,12 +31,17 @@ module.exports = function(app){
     app.delete("/api/notes/:id", function(req,res){
         let queryID = req.params.id;
         db = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-        for(i in db){
-            if(queryID == db[i].id){
-                db.splice(i,1);
-                fs.writeFileSync('./db/db.json',JSON.stringify(db),'utf8');
+        if(db.length === 1){
+            db=[];
+        }
+        else{
+            for(i in db){
+                if(queryID == db[i].id){
+                    db.splice(i,1);
+                }
             }
         }
+        fs.writeFileSync('./db/db.json',JSON.stringify(db),'utf8');
         res.send();
     });
 }
