@@ -20,7 +20,6 @@ app.get("/notes", function(req, res) {
 });
 
 app.get("/api/db",function(req,res){
-    
     return res.json(db);
 });
 
